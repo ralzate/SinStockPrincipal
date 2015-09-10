@@ -81,20 +81,35 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="active"><%= link_to 'INICIO', root_path %></li>
-                    <li><%= link_to 'Productos', products_path %></li>
+
+                    <li>
+                        <%= form_tag request.path, :method => 'get', :class => 'navbar-form navbar-left' do %>
+                        <%= content_tag :label do %>
+                        <%= text_field_tag :search, params[:search], :placeholder => "Encuentre su Producto", :class => 'form-control' %>
+                        <%= submit_tag "Consultar", :name => nil %>
+                        <% end %>
+                        <% end %>
+                    </li>
+                    <% if not current_user %>
+                    <li><!-- Button trigger modal -->
+                        <%= link_to 'Personas', "#", data: {toggle: "modal", target: "#myModal"} %>
+                    </li>
+                    <li>
+                        <%= link_to 'Empresas', "#", data: {toggle: "modal", target: "#myModal2"} %>
+                    </li>
+                    <% end %>
+                    <li>
+                    
+                    </li>
                     <% if current_user %>
                         <% if current_user.rol_id == 1 %>
                             <li><%= link_to "Users", users_path %></li>
                             <li><%= link_to "Roles", roles_path %></li>
-                            <li><%= link_to "Categorias", sector_categories_path %></li>
-                            <li><%= link_to "Tipo Productos", type_products_path %></li>
-                            <li><%= link_to "Tipo Users", type_users_path %></li>
+                             <li><%= link_to 'Productos', products_path %></li>
+                            <li><%= link_to "categori", sector_categories_path %></li>
+                            <li><%= link_to "tipo pro", type_products_path %></li>
+                            <li><%= link_to "Tipo use", type_users_path %></li>
                         <% end %>
-                        <li><form role="search" class="navbar-form navbar-left">
-                            <div class="form-group">
-                                <input type="text" placeholder="Search" class="form-control">
-                            </div>
-                        </form></li>
                         <li class="dropdown">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">Bienvenido <%= current_user.first_name %> <b class="caret"></b></a>
                             <ul role="menu" class="dropdown-menu">
@@ -106,12 +121,26 @@
                     <% end %>
                 </ul>
                 <% if not current_user %>
-                <ul class="nav navbar-nav navbar-right">
-                  <li><%= link_to 'Signup', signup_path %></li>
-                  <li><%= link_to 'Login', login_path %></li>
-                </ul>
-                <% end %>
+                   <%= form_tag sessions_path, :method => :post, :class => 'navbar-form navbar-right'   do %>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <%= email_field_tag :email, nil, class: 'form-control', required: true %>                                        
+                        </div>
 
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            <%= password_field_tag :password, nil, class: 'form-control', required: true %>                                        
+                        </div>
+
+                        <%= submit_tag 'Login', class: 'btn btn-xs btn-success ' %>
+                   </form>
+                    <% end %>
+
+
+                
+                <% end %>
+    
+    
             </div>
         </div>
     </div>

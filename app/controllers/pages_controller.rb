@@ -11,4 +11,14 @@ class PagesController < ApplicationController
   end
   def help
   end
+  
+  def create
+    if @user = login(params[:email], params[:password], params[:remember_me])
+      flash[:success] = "Bienvenido, #{@user.first_name}!"
+      redirect_back_or_to @user
+    else
+      flash.now[:danger] = "¡Error de inicio de sesion! Por favor, consultar su correo electrónico y contraseña."
+      render 'new'
+    end
+  end
 end

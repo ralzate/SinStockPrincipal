@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get 'pages/help'
   get 'pages/treeview'
   get 'mapa_sitio' => 'pages#treeview', as: 'mapa_sitio'
+    match 'pages/home', to: 'pages#home', via: :post
+
   root to: 'pages#home'
   resources :users do
     member do

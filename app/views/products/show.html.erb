@@ -38,27 +38,27 @@ $(window).load(function() {
       <div class="carousel-inner">
         <div class="item active">
           <%= link_to image_tag(@product.avatar, size:'275x275'), @product, :remote => true,  :rel => "tooltip", :title => "Mostrar", :class => 'btn btn-link' %>
-           <div class="carousel-caption">
-            <h4><%= link_to image_tag(@product.avatar, size:'40x40'), @product, :remote => true,  :rel => "tooltip", :title => "Mostrar", :class => 'btn btn-link' %></h4>
-          </div>
         </div><!-- End Item -->
          <div class="item">
-          <%= link_to image_tag(@product.avatar2, size:'275x275'), @product, :remote => true,  :rel => "tooltip", :title => "Mostrar", :class => 'btn btn-link' %>
-           <div class="carousel-caption">
-            <h4><%= link_to image_tag(@product.avatar2, size:'40x40'), @product, :remote => true,  :rel => "tooltip", :title => "Mostrar", :class => 'btn btn-link' %></h4>
-          </div>
+          <% if @product.avatar2? %>
+            <%= link_to image_tag(@product.avatar2, size:'275x275'), @product, :remote => true,  :rel => "tooltip", :title => "Mostrar", :class => 'btn btn-link' %>
+          <% else %>
+            <%= link_to image_tag(@product.avatar, size:'275x275'), @product, :remote => true,  :rel => "tooltip", :title => "Mostrar", :class => 'btn btn-link' %>
+          <% end %>  
         </div><!-- End Item -->
         <div class="item">
+        <% if @product.avatar3? %>
           <%= link_to image_tag(@product.avatar3, size:'275x275'), @product, :remote => true,  :rel => "tooltip", :title => "Mostrar", :class => 'btn btn-link' %>
-           <div class="carousel-caption">
-            <h4><%= link_to image_tag(@product.avatar3, size:'40x40'), @product, :remote => true,  :rel => "tooltip", :title => "Mostrar", :class => 'btn btn-link' %></h4>
-          </div>
+        <% else %>
+          <%= link_to image_tag(@product.avatar, size:'275x275'), @product, :remote => true,  :rel => "tooltip", :title => "Mostrar", :class => 'btn btn-link' %>
+        <% end %>
         </div><!-- End Item -->
         <div class="item">
+        <% if @product.avatar4? %>
           <%= link_to image_tag(@product.avatar4, size:'275x275'), @product, :remote => true,  :rel => "tooltip", :title => "Mostrar", :class => 'btn btn-link' %>
-           <div class="carousel-caption">
-            <h4><%= link_to image_tag(@product.avatar4, size:'40x40'), @product, :remote => true,  :rel => "tooltip", :title => "Mostrar", :class => 'btn btn-link' %></h4>
-          </div>
+        <% else %>
+          <%= link_to image_tag(@product.avatar, size:'275x275'), @product, :remote => true,  :rel => "tooltip", :title => "Mostrar", :class => 'btn btn-link' %>
+        <% end %>
         </div><!-- End Item -->
       </div><!-- End Carousel Inner -->
     <ul class="list-group col-sm-4">
@@ -66,7 +66,12 @@ $(window).load(function() {
       <h4><%= link_to image_tag(@product.avatar, size:'40x40'), @product, :class => 'btn btn-link' %></h4></li>
       <li data-target="#myCarousel" data-slide-to="1" class="list-group-item"><h4><%= link_to image_tag(@product.avatar2, size:'40x40'), @product, :class => 'btn btn-link' %></h4></li>
       <li data-target="#myCarousel" data-slide-to="2" class="list-group-item"><h4><%= link_to image_tag(@product.avatar3, size:'40x40'), @product, :class => 'btn btn-link' %></h4></li>
-      <li data-target="#myCarousel" data-slide-to="3" class="list-group-item"><h4><%= link_to image_tag(@product.avatar4, size:'40x40'), @product, :class => 'btn btn-link' %></h4></li>
+      <li data-target="#myCarousel" data-slide-to="3" class="list-group-item">
+      <% if @product.avatar4? %>
+        <h4><%= link_to image_tag(@product.avatar4, size:'40x40'), @product, :class => 'btn btn-link' %></h4>
+      <% else %> 
+        <h4><%= link_to image_tag(@product.avatar, size:'275x275'), @product, :rel => "tooltip", :title => "Imagen 4 Articulo #{@product.name}", :class => 'btn btn-link' %></h4>
+      <% end %>  </li>
     </ul>
 
       <!-- Controls -->

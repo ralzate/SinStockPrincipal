@@ -28,484 +28,844 @@
 
 
 
-
-
-
-
 <div align="center">
+
     <% if not current_user %>
-    <a href="#div1" id="activator" class='activator'><%= image_tag "persona.png", :alt => "rss feed", :class => 'btn btn-default'%></a>
-
-    <a href="#div2" id="activator2" class='activator2'><%= image_tag("empresa.png", :alt => "rss feed", :class => 'btn btn-default') %></a>
-    <% end %>
-    <% if current_user %>
-        <% if current_user.type_user == "Persona" %>
-            <a href="#div1" id="hide2" class='MO'><%= image_tag("persona.png", :alt => "rss feed", :class => 'btn btn-default') %></a>
-        <% end %>
-    <% end %>
-    <% if current_user %>
-        <% if current_user.type_user == "Empresa" %>
-            <a href="#div2" id="hide1" class='MO'><%= image_tag("empresa.png", :alt => "rss feed", :class => 'btn btn-default') %></a>
-        <% end %>
-    <% end %>    
-</div>
 
 
-    <style>
-        body{
-            background:transparent url(title.png) no-repeat top center;
-            font-family:Arial;
-            height:2000px;
-        }
-        .header
-        {
-            width:600px;
-            height:56px;
-            position:absolute;
-            top:0px;
-            left:25%;
-            background:#fff url(title.png) no-repeat top left;
-        }
-  
 
-        /* Style for overlay and box */
-        .overlay{
-            background:transparent url(/assets/overlay.jpg) repeat top left;
-            position:fixed;
-            margin-top: 300px !important;
-            bottom:0px;
-            left:0px;
-            right:0px;
-            z-index:100;
-        }
-        .box{
-            position:fixed;
-            width:  1000px;
-            top:-1600px;
-            margin-top: -45px;
-            left:10%;
-            right:30%;
-            background-color:#fff;
-            color:#7F7F7F;
-            padding:20px;
-            border:2px solid #ccc;
-            -moz-border-radius: 20px;
-            -webkit-border-radius:20px;
-            -khtml-border-radius:20px;
-            -moz-box-shadow: 0 1px 5px #333;
-            -webkit-box-shadow: 0 1px 5px #333;
-            z-index:101;
-        }
-        .box h1{
-            border-bottom: 1px dashed #7F7F7F;
-            margin:-20px -20px 0px -20px;
-            padding:10px;
-background-color: #1ABC9C; 
-            color:#FFFFFF;
-            -moz-border-radius:20px 20px 0px 0px;
-            -webkit-border-top-left-radius: 20px;
-            -webkit-border-top-right-radius: 20px;
-            -khtml-border-top-left-radius: 20px;
-            -khtml-border-top-right-radius: 20px;
-        }
-        a.boxclose{
-            float:right;
-            background:transparent url(/assets/cancel.jpg) repeat top left;
-            margin-top:-30px;
-            margin-right:-30px;
-            cursor:pointer;
-        }
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content" style="margin-left:-300px; width:200%;">
+              <div class="modal-header" style="background-color: #1abc9c;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Ingresa los Datos Para Personas</h4>
+              </div>
+              <div class="modal-body">
+                
 
-        .header2
-        {
-            width:600px;
-            height:56px;
-            position:absolute;
-            top:0px;
-            left:25%;
-            background:#fff url(title.png) no-repeat top left;
-        }
-  
+                <!-- The overlay and the box -->
+                <div class="overlay2" id="overlay2" style="display:none;"></div>
+                <div class="box2" id="box2">
 
-        /* Style for overlay and box */
-        .overlay2{
-            background:transparent url(/assets/overlay.jpg) repeat top left;
-            position:fixed;
-            margin-top: 300px !important;
-            bottom:0px;
-            left:0px;
-            right:0px;
-            z-index:100;
-        }
-        .box2{
-            position:fixed;
-            width:  1000px;
-            top:-1600px;
-            margin-top: -45px;
-            left:10%;
-            right:30%;
-            background-color:#fff;
-            color:#7F7F7F;
-            padding:20px;
-            border:2px solid #ccc;
-            -moz-border-radius: 20px;
-            -webkit-border-radius:20px;
-            -khtml-border-radius:20px;
-            -moz-box-shadow: 0 1px 5px #333;
-            -webkit-box-shadow: 0 1px 5px #333;
-            z-index:101;
-        }
-        .box2 h1{
-            border-bottom: 1px dashed #7F7F7F;
-            margin:-20px -20px 0px -20px;
-            padding:10px;
-background-color: #1ABC9C; 
-            color:#FFFFFF;
-            -moz-border-radius:20px 20px 0px 0px;
-            -webkit-border-top-left-radius: 12px;
-            -webkit-border-top-right-radius: 12px;
-            -khtml-border-top-left-radius: 12px;
-            -khtml-border-top-right-radius: 12px;
-        }
-        a.boxclose2{
-            float:right;
-            background:transparent url(/assets/cancel.jpg) repeat top left;
-            margin-top:-30px;
-            margin-right:-30px;
-            cursor:pointer;
-        }
-    </style>
+                    <%= form_for(@user, html: { multipart: true }) do |f| %>
 
-        <!-- The overlay and the box -->
-        <div class="overlay" id="overlay" style="display:none;"></div>
-        <div class="box" id="box">
+                        <div class="container">
 
-            <%= form_for(@user, html: { multipart: true }) do |f| %>
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                        
-                        <!-- PRICE ITEM -->
-                        <div class="panel price panel-green" style="width:450%;">
-                            <div class="panel-body text-center" style="height:70px;">
-                                <p class="lead" style="font-size:30px"><strong>Ingresa los Datos Para Personas</strong></p>
+
+                        <script type="text/javascript">
+                             function validate(field) {
+                            // Get the  value of the input field being submitted
+                            value = document.getElementById(field).value;
+
+                            // Set the error field tag in the html
+                            errorField = field + 'Error';
+
+                            // Set the success field
+                            successField = field + 'Success';
+
+                            if (value != '') {
+                                document.getElementById(successField).style.display = 'block';
+                                document.getElementById(errorField).style.display = 'none';
+                                return true;
+                            } else {
+                                document.getElementById(successField).style.display = 'none';
+                                document.getElementById(errorField).style.display = 'block';
+                                return false;
+                            }
+                        }
+
+                        function SimulateSubmit() {
+                            // Query your elements some how
+                            var inputs = document.getElementsByTagName('input');
+
+                            // Loop your elements
+                            for (i = 0, len = inputs.length; i < len; i++) {
+                                if( validate(inputs[i].id) === false) {
+                                }
+                            }
+                        }
+                        </script>
+
+                        <style type="text/css">
+                            .err, .suc {
+                            display: none;
+                        }
+                        .err { color: red;}
+                        .suc { color: green;}
+                        </style>
+
+
+
+                    <div class="container">
+
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                                
+                                <!-- PRICE ITEM -->
+                                <div class="panel price panel-green" style="width:450%;">
+ 
+                                    <div class="container">
+                                        <div class="row centered-form ">
+                                        <div class="col-xs-12 col-sm-8 col-md-12 ">
+                 
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <div class="input-container">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon">*Primer Nombre:</span>
+                                                                            <%= f.text_field :first_name, class: "form-control valid", id: 'PrimerNombre', onblur: "validate('PrimerNombre')"  %>
+                                                                            
+                                                                        </div>
+                                                                        <span id="PrimerNombreError" class="err">Por Favor un Nombre</span>
+                                                                        <span id="PrimerNombreSuccess" class="suc">Dato ingresado correctamente</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <div class="input-container">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon">Segundo Nombre:</span>
+                                                                            <%= f.text_field :second_name, class: "form-control valid", id: 'SegundoNombre', onblur: "validate('SegundoNombre')" %>
+                                                                        </div>
+                                                                        <span id="SegundoNombreSuccess" class="suc">Dato ingresado correctamente</span>         
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <div class="input-container">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon">*Identificacion:</span>
+                                                                            <%= f.text_field :identification, class: "form-control valid", id: 'Identificacion', onblur: "validate('Identificacion')" %>
+                                                                        </div>
+                                                                        <span id="IdentificacionError" class="err">Por Favor ingresar una Identificación</span>
+                                                                        <span id="IdentificacionSuccess" class="suc">Dato ingresado correctamente</span> 
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <br/>
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <div class="input-container">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon">*Primer Apellido:</span>
+                                                                            <%= f.text_field :first_surname, class: "form-control valid" , id: 'PrimerApellido', onblur: "validate('PrimerApellido')"%>
+                                                                        </div>
+                                                                        <span id="PrimerApellidoError" class="err">Por Favor ingresar un apellido</span>
+                                                                        <span id="PrimerApellidoSuccess" class="suc">Dato ingresado correctamente</span> 
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <div class="input-container">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon">Segundo Apellido:</span>
+                                                                            <%= f.text_field :second_surname, class: "form-control valid", id: 'SegundoApellido', onblur: "validate('SegundoApellido')" %>
+                                                                        </div>
+                                                                        <span id="SegundoApellidoSuccess" class="suc">Dato ingresado correctamente</span> 
+                                                                    </div>
+                                                                </div>
+                                                                 <div class="col-md-4">
+                                                                    <div class="input-container">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon">*Telefono:</span>
+                                                                            <%= f.text_field :phone, class: "form-control valid", id: 'Telefono', onblur: "validate('Telefono')" %>
+                                                                        </div>
+                                                                        <span id="TelefonoError" class="err">Por Favor ingresar un Telefono</span>
+                                                                        <span id="TelefonoSuccess" class="suc">Dato ingresado correctamente</span> 
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <br/>
+                                                            <div class="row">
+             
+                                                                <div class="col-md-4">
+                                                                    <div class="input-container">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon">*Razón Social:</span>
+                                                                            <%= f.text_field :business_name, class: "form-control valid",  id: 'business_name', onblur: "validate('business_name')" %>
+                                                                        </div>
+                                                                        <span id="business_nameError" class="err">Por Favor ingresar una razón social</span>
+                                                                        <span id="business_nameSuccess" class="suc">Dato ingresado correctamente</span> 
+                                                                    </div>
+                                                                </div>                                                                 
+                                                            </div>
+                                                            <br/>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="input-container">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon">Descripción:</span>
+                                                                            <%= f.text_area :description, class: "form-control valid",  id: 'Test9', onblur: "validate('Test9')"  %>
+                                                                        </div>
+                                                                        <span id="Test9Error" class="err">Por Favor ingresar una Descripción</span>
+                                                                        <span id="Test9Success" class="suc">Dato ingresado correctamente</span> 
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <br/>
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <div class="input-container">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon">Rut:</span>
+                                                                            <%= f.text_field :rut, class: "form-control valid",  id: 'Rut', onblur: "validate('Rut')"  %>
+                                                                        </div>
+                                                                        <span id="t9Error" class="err">Por Favor ingresar una Descripción</span>
+                                                                        <span id="t9Success" class="suc">Dato ingresado correctamente</span> 
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <div class="input-container">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon">Rol:</span>
+                                                                             <%= f.collection_select :rol_id, Rol.all, :id, :name, { prompt: "Por favor selecciona uno", :selected => params[:search], hide_label: :true }, class: "form-control valid" %>
+                                                                           
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <div class="input-container">
+                                                                        <div class="input-group">
+                                                                           
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <br/>
+                                                            <div align="center">
+                                                                <h1>Datos de acceso</h1>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <div class="input-container">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon">Email:</span>
+                                                                            <%= f.text_field :email, class: "form-control valid",  id: 'Test9', onblur: "validate('Test9')" %>
+                                                                        </div>
+                                                                        <span id="Test9Error" class="err">Por Favor ingresar un email</span>
+                                                                        <span id="Test9Success" class="suc">Dato ingresado correctamente</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <div class="input-container">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon">Clave:</span>
+                                                                            <%= f.password_field :password, class: "form-control valid", id: 'password1' %>
+
+                                                                        </div>
+                                                                        <div class="row" align="left">
+                                                                            <div class="col-sm-12">
+                                                                                <span id="8char" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span>Minimo 8 Caracteres<br>
+                                                                                <span id="ucase" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span>Debe contener una letra en mayuscula
+                                                                            </div>
+                                                                            <div class="col-sm-12">
+                                                                                <span id="lcase" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span>Debe contener una letra minuscula<br>
+                                                                                <span id="num" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span>Debe contener un numero
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <div class="input-container">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon">Confirmar clave:</span>
+                                                                            <%= f.password_field :password_confirmation, class: "form-control valid", id: 'password2' %>
+                                                                        </div>
+                                                                        <div align="left">
+                                                                        <span id="pwmatch" class="glyphicon glyphicon-remove" style="color:#FF0004;">
+                                                                        </span>Las Contraseñas concuerdan
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <br/>   
+                                                            <div align="center">
+                                                                <h1>Ingresa tu Foto</h1>
+                                                            </div>
+                                                            <br/>
+                                                             <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="input-container">
+                                                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                                          <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+                                                                          <div>
+                                                                            <span class="btn btn-default btn-file"><span class="fileinput-new"><%= f.file_field :picture, class: "form-control", id: 'button' %></span><span class="fileinput-exists">Cambiar</span><input type="file" name="..."></span>
+                                                                            <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Eliminar</a>
+                                                                          </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>    
+                                                            <%= f.hidden_field :type_user, value: "Persona" %>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-info  btn-lg" data-dismiss="modal">Close</button>
+                                                            <%= f.submit 'Enviar!', class: 'btn btn-primary btn-sm' %>
+                                                        </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
                             </div>
-                            <div class="container">
-                                <div class="row centered-form ">
-                                <div class="col-xs-12 col-sm-8 col-md-12 ">
-                                    <div class="panel panel-default">
-          
-                                                <div class="panel-body">
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                            <div class="input-container">
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon">Primer Nombre:</span>
-                                                                    <%= f.text_field :first_name, class: "form-control valid" %>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <div class="input-container">
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon">Segundo Nombre:</span>
-                                                                    <%= f.text_field :second_name, class: "form-control valid" %>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <div class="input-container">
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon">Identificacion:</span>
-                                                                    <%= f.text_field :identification, class: "form-control valid" %>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <br/>
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                            <div class="input-container">
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon">Primer Apellido:</span>
-                                                                    <%= f.text_field :first_surname, class: "form-control valid" %>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <div class="input-container">
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon">Segundo Apellido:</span>
-                                                                    <%= f.text_field :second_surname, class: "form-control valid" %>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                         <div class="col-md-4">
-                                                            <div class="input-container">
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon">Telefono:</span>
-                                                                    <%= f.text_field :phone, class: "form-control valid" %>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <br/>
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                            <div class="input-container">
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon">Email:</span>
-                                                                    <%= f.text_field :email, class: "form-control valid" %>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                        </div>
+                    </div>
+                </div>   
+         
+                    <% end %>
+           
+                </div>         
 
-                                                        <div class="col-md-4">
-                                                            <div class="input-container">
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon">Clave:</span>
-                                                                    <%= f.password_field :password, class: "form-control valid" %>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+              </div>
 
-                                                         <div class="col-md-4">
-                                                            <div class="input-container">
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon">Confirmar clave:</span>
-                                                                    <%= f.password_field :password_confirmation, class: "form-control valid" %>
+            </div>
+          </div>
+        </div>
+
+
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content" style="margin-left:-300px; width:200%;">
+              <div class="modal-header" style="background-color: #1abc9c;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"><strong>Ingresa los Datos Para Empresas</strong></h4>
+              </div>
+              <div class="modal-body">
+                
+                <!-- The overlay and the box -->
+                <div class="overlay2" id="overlay2" style="display:none;"></div>
+                <div class="box2" id="box2">
+
+                    <%= form_for(@user, html: { multipart: true }) do |f| %>
+
+                        <script type="text/javascript">
+                         function validate(field) {
+                        // Get the  value of the input field being submitted
+                        value = document.getElementById(field).value;
+
+                        // Set the error field tag in the html
+                        errorField = field + 'Error';
+
+                        // Set the success field
+                        successField = field + 'Success';
+
+                        if (value != '') {
+                            document.getElementById(successField).style.display = 'block';
+                            document.getElementById(errorField).style.display = 'none';
+                            return true;
+                        } else {
+                            document.getElementById(successField).style.display = 'none';
+                            document.getElementById(errorField).style.display = 'block';
+                            return false;
+                        }
+                    }
+
+                    function SimulateSubmit() {
+                        // Query your elements some how
+                        var inputs = document.getElementsByTagName('input');
+
+                        // Loop your elements
+                        for (i = 0, len = inputs.length; i < len; i++) {
+                            if( validate(inputs[i].id) === false) {
+                            }
+                        }
+                    }
+                    </script>
+
+                    <style type="text/css">
+                        .err, .suc {
+                        display: none;
+                    }
+                    .err { color: red;}
+                    .suc { color: green;}
+                    </style>
+
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-4 col-sm-12 col-md-3 col-lg-3">
+                                
+                                <!-- PRICE ITEM -->
+                                <div class="panel price panel-green" style="width:430%;">
+                                    <div class="container">
+                                        <div class="row centered-form ">
+                                        <div class="col-xs-12 col-sm-8 col-md-12 ">
+
+     
+
+
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="input-container">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon">*Nombre:</span>
+                                                                            <%= f.text_field :first_name, class: "form-control", id: 'EmpresaNombre', onblur: "validate('EmpresaNombre')" %>
+                                                                        </div>
+                                                                        <span id="EmpresaNombreError" class="err">Por Favor ingresar un Nombre</span>
+                                                                        <span id="EmpresaNombreSuccess" class="suc">Dato ingresado correctamente</span> 
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="input-container">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon">*Telefono:</span>
+                                                                            <%= f.number_field :phone, class: "form-control", id: 'EmpresaTelefono', onblur: "validate('EmpresaTelefono')" %>
+                                                                        </div>
+                                                                        <span id="EmpresaTelefonoError" class="err">Por Favor ingresar un Telefono</span>
+                                                                        <span id="EmpresaTelefonoSuccess" class="suc">Dato ingresado correctamente</span> 
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <br/>
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                            <div class="input-container">
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon">Primer Telefono:</span>
-                                                                    <%= f.text_field :first_phone_of_contact_person, class: "form-control valid" %>
+                                                            <br/>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="input-container">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon">*Dirección:</span>
+                                                                            <%= f.text_field :address, class: "form-control", id: 'EmpresaDireccion', onblur: "validate('EmpresaDireccion')" %>
+                                                                        </div>
+                                                                        <span id="EmpresaDireccionError" class="err">Por Favor ingresar un Dirección</span>
+                                                                        <span id="EmpresaDireccionSuccess" class="suc">Dato ingresado correctamente</span> 
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="input-container">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon">*Celular:</span>
+                                                                            <%= f.number_field :cell_phone, class: "form-control", id: 'EmpresaCelular', onblur: "validate('EmpresaCelular')" %>
+                                                                        </div>
+                                                                        <span id="EmpresaCelularError" class="err">Por Favor ingresar un Celular</span>
+                                                                        <span id="EmpresaCelularSuccess" class="suc">Dato ingresado correctamente</span> 
+                                                                    </div>
+                                                                </div> 
+                                                            </div>
+                                                            <br/>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="input-container">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon">Pagina Web:</span>
+                                                                            <%= f.text_field :web_page, class: "form-control", id: 'EmpresaPaginaWeb', onblur: "validate('EmpresaPaginaWeb')" %>
+                                                                        </div>
+                                                                        <span id="EmpresaPaginaWebSuccess" class="suc">Dato ingresado correctamente</span> 
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="input-container">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon">*Razón Social:</span>
+                                                                            <%= f.text_field :business_name, class: "form-control valid",  id: 'EmpresaRazonSocial', onblur: "validate('EmpresaRazonSocial')" %>
+                                                                        </div>
+                                                                        <span id="EmpresaRazonSocialError" class="err">Por Favor ingresar una razón social</span>
+                                                                        <span id="EmpresaRazonSocialSuccess" class="suc">Dato ingresado correctamente</span> 
+                                                                    </div>
+                                                                </div>  
+                                                            </div>
+                                                            <br/>   
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="input-container">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon">*Nit:</span>
+                                                                            <%= f.text_field :nit, class: "form-control", id: 'EmpresaNit', onblur: "validate('EmpresaNit')" %>
+                                                                        </div>
+                                                                        <span id="EmpresaNitError" class="err">Por Favor ingresar un Nit</span>
+                                                                        <span id="EmpresaNitSuccess" class="suc">Dato ingresado correctamente</span> 
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="input-container">
+                                                                        <div class="input-group">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>  
+                                                            </div>
+                                                            <br/>   
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="input-container">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon">*Descripción Empresa:</span>
+                                                                            <%= f.text_area :description, class: "form-control valid",  id: 'EmpresaDescripcion', onblur: "validate('EmpresaDescripcion')"  %>
+                                                                        </div>
+                                                                        <span id="EmpresaDescripcionError" class="err">Por Favor ingresar una Descripción</span>
+                                                                        <span id="EmpresaDescripcionSuccess" class="suc">Dato ingresado correctamente</span> 
+                                                                    </div>
+                                                                </div> 
+                                                            </div>
+                                                            <br/>
+                                                            <div align="center">
+                                                                <h2>Persona de contacto</h2>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="input-container">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon">*Nombre Uno:</span>
+                                                                            <%= f.text_field :first_name_of_contact_person, class: "form-control", id: 'EmpresaPrimerNombreContacto', onblur: "validate('EmpresaPrimerNombreContacto')" %>
+                                                                        </div>
+                                                                        <span id="EmpresaPrimerNombreContactoError" class="err">Por Favor ingresar un Nombre</span>
+                                                                        <span id="EmpresaPrimerNombreContactoSuccess" class="suc">Dato ingresado correctamente</span> 
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="input-container">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon">Nombre Dos:</span>
+                                                                            <%= f.text_field :second_name_of_contact_person, class: "form-control", id: 'EmpresaSegundoNombreContacto', onblur: "validate('EmpresaSegundoNombreContacto')" %>
+                                                                        </div>
+                                                                        <span id="EmpresaSegundoNombreContactoSuccess" class="suc">Dato ingresado correctamente</span> 
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <div class="input-container">
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon">Segundo Telefono:</span>
-                                                                    <%= f.text_field :second_phone_of_contact_person, class: "form-control valid" %>
+                                                            <br/>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="input-container">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon">*Apellido Uno:</span>
+                                                                            <%= f.text_field :first_surname_of_contact_person, class: "form-control", id: 'EmpresaPrimerApellido', onblur: "validate('EmpresaPrimerApellido')" %>
+                                                                        </div>
+                                                                        <span id="EmpresaPrimerApellidoError" class="err">Por Favor ingresar un Apellido</span>
+                                                                        <span id="EmpresaPrimerApellidoSuccess" class="suc">Dato ingresado correctamente</span> 
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="input-container">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon">Apellido Dos:</span>
+                                                                            <%= f.text_field :second_surname_of_contact_person, class: "form-control", id: 'EmpresaSegundoApellido', onblur: "validate('EmpresaSegundoApellido')" %>
+                                                                        </div>
+                                                                        <span id="EmpresaSegundoApellidoSuccess" class="suc">Dato ingresado correctamente</span> 
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                         <div class="col-md-4">
-                                                            <div class="input-container">
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon">Descripción:</span>
-                                                                    <%= f.text_field :description, class: "form-control valid" %>
+                                                            <br/>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="input-container">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon">*Telefono uno:</span>
+                                                                            <%= f.text_field :first_phone_of_contact_person, class: "form-control valid", id: 'PrimerTelefono', onblur: "validate('PrimerTelefono')" %>
+                                                                        </div>
+                                                                        <span id="PrimerTelefonoError" class="err">Por Favor ingresar un Telefono</span>
+                                                                        <span id="PrimerTelefonoSuccess" class="suc">Dato ingresado correctamente</span> 
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="input-container">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon">Telefono dos:</span>
+                                                                            <%= f.text_field :second_phone_of_contact_person, class: "form-control valid",  id: 'SegundoTelefono', onblur: "validate('SegundoTelefono')" %>
+                                                                        </div>
+                                                                        <span id="SegundoTelefonoSuccess" class="suc">Dato ingresado correctamente</span> 
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <br/>
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="input-container">
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon">Roles:</span>
-                                                                    <%= f.collection_select :rol_id, Rol.all, :id, :name, { prompt: "Por favor selecciona uno", :selected => params[:search], hide_label: :true }, class: "input-sm" %> 
+                                                            <br/>
+                                                            <div align="center">
+                                                                <h1>Ingresa tu Logo</h1>
+                                                            </div>
+                                                            <br/>
+                                                             <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="input-container">
+                                                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                                          <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+                                                                          <div>
+                                                                            <span class="btn btn-default btn-file"><span class="fileinput-new"><%= f.file_field :picture, class: "form-control", id: 'button' %></span><span class="fileinput-exists">Cambiar</span><input type="file" name="..."></span>
+                                                                            <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Eliminar</a>
+                                                                          </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
+                                                            </div>    
+
+
+                                                            <br/>
+                                                            
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-info  btn-lg" data-dismiss="modal">Close</button>
+                                                                <%= f.submit 'Enviar!', class: 'btn btn-primary' %>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-6">
-                                                            <div class="input-container">
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon">Foto:</span>
-                                                                    <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png',  class: "form-control valid"  %>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <br/>
-                                                    <%= f.hidden_field :type_user, value: "Persona" %>
-                                                </div>
-                                                    <%= f.submit 'Enviar!', class: 'btn btn-primary btn-sm' %>
-                                                    <%= link_to 'Atras', root_path, class: 'btn btn-info' %>
+                                                    <% end %>
+                                        </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    
                     </div>
-                </div>
-                <!-- /PRICE ITEM -->           
+                </div>                           
+
+                <!-- The JavaScript -->
+              </div>
+
             </div>
-            <% end %>
-   
-        </div>         
+          </div>
+        </div>
+    <% end %>
+
+    
+ 
+</div>
+
+
 
     
 
 
+ 
 
-                <!-- The overlay and the box -->
-        <div class="overlay2" id="overlay2" style="display:none;"></div>
-        <div class="box2" id="box2">
 
-            <%= form_for(@user, html: { multipart: true }) do |f| %>
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                        
-                        <!-- PRICE ITEM -->
-                        <div class="panel price panel-green" style="width:450%;">
-                            <div class="panel-body text-center" style="height:70px;">
-                                <p class="lead" style="font-size:30px"><strong>Ingresa los Datos Para Empresas</strong></p>
-                            </div>
-                            <div class="container">
-                                <div class="row centered-form ">
-                                <div class="col-xs-12 col-sm-8 col-md-12 ">
-                                    <div class="panel panel-default">
-          
-                                                <div class="panel-body">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="input-container">
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon">Nombre:</span>
-                                                                    <%= f.text_field :first_name, class: "form-control" %>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="input-container">
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon">Telefono:</span>
-                                                                    <%= f.text_field :phone, class: "form-control" %>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <br/>
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="input-container">
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon">Dirección:</span>
-                                                                    <%= f.text_field :address, class: "form-control" %>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="input-container">
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon">Celular:</span>
-                                                                    <%= f.text_field :cell_phone, class: "form-control" %>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <br/>
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="input-container">
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon">Pagina_Web:</span>
-                                                                    <%= f.text_field :web_page, class: "form-control" %>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="input-container">
-                                                                <div class="input-group">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <br/>
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="input-container">
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon">Primer_Nombre:</span>
-                                                                    <%= f.text_field :first_name_of_contact_person, class: "form-control" %>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="input-container">
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon">Segundo_Nombre:</span>
-                                                                    <%= f.text_field :second_name_of_contact_person, class: "form-control" %>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <br/>
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="input-container">
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon">Primer_Apellido:</span>
-                                                                    <%= f.text_field :first_surname_of_contact_person, class: "form-control" %>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="input-container">
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon">Segundo_Apellido:</span>
-                                                                    <%= f.text_field :second_surname_of_contact_person, class: "form-control" %>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
 
-                                                    <br/>
-                                                    <%= f.submit 'Enviar!', class: 'btn btn-primary btn-lg' %>
-                                                    <%= link_to 'Atras', root_path, class: 'btn btn-info' %>
-                                                </div>
-                                            <% end %>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+    $("input[type=password]").keyup(function(){
+    var ucase = new RegExp("[A-Z]+");
+    var lcase = new RegExp("[a-z]+");
+    var num = new RegExp("[0-9]+");
+    
+    if($("#password1").val().length >= 8){
+        $("#8char").removeClass("glyphicon-remove");
+        $("#8char").addClass("glyphicon-ok");
+        $("#8char").css("color","#00A41E");
+    }else{
+        $("#8char").removeClass("glyphicon-ok");
+        $("#8char").addClass("glyphicon-remove");
+        $("#8char").css("color","#FF0004");
+    }
+    
+    if(ucase.test($("#password1").val())){
+        $("#ucase").removeClass("glyphicon-remove");
+        $("#ucase").addClass("glyphicon-ok");
+        $("#ucase").css("color","#00A41E");
+    }else{
+        $("#ucase").removeClass("glyphicon-ok");
+        $("#ucase").addClass("glyphicon-remove");
+        $("#ucase").css("color","#FF0004");
+    }
+    
+    if(lcase.test($("#password1").val())){
+        $("#lcase").removeClass("glyphicon-remove");
+        $("#lcase").addClass("glyphicon-ok");
+        $("#lcase").css("color","#00A41E");
+    }else{
+        $("#lcase").removeClass("glyphicon-ok");
+        $("#lcase").addClass("glyphicon-remove");
+        $("#lcase").css("color","#FF0004");
+    }
+    
+    if(num.test($("#password1").val())){
+        $("#num").removeClass("glyphicon-remove");
+        $("#num").addClass("glyphicon-ok");
+        $("#num").css("color","#00A41E");
+    }else{
+        $("#num").removeClass("glyphicon-ok");
+        $("#num").addClass("glyphicon-remove");
+        $("#num").css("color","#FF0004");
+    }
+    
+    if($("#password1").val() == $("#password2").val()){
+        $("#pwmatch").removeClass("glyphicon-remove");
+        $("#pwmatch").addClass("glyphicon-ok");
+        $("#pwmatch").css("color","#00A41E");
+    }else{
+        $("#pwmatch").removeClass("glyphicon-ok");
+        $("#pwmatch").addClass("glyphicon-remove");
+        $("#pwmatch").css("color","#FF0004");
+    }
+});
+    
+</script>
+
+
+
+
+<style type="text/css">
+    
+body{
+    margin-top:20px;
+}
+
+.store-item {
+    padding: 5px;
+    position: relative;
+    display: block;
+    margin-bottom: 30px;
+    border: 4px solid #eee;
+    -webkit-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+}
+
+.store-item:hover {
+    border-color: #ddd;
+    text-decoration: none;
+}
+
+.store-item:hover .store-item-image img {
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
+}
+
+.store-item:hover .store-item-rating {
+    animation-name: fadeInQuick;
+    -webkit-animation-name: fadeInQuick;
+    animation-duration: .5s;
+    -webkit-animation-duration: .5s;
+    animation-timing-function: ease-out;
+    -webkit-animation-timing-function: ease-out;
+    visibility: visible!important;
+    display:block;
+     opacity: 1;
+     background:transparent;
+}
+
+.store-item-rating {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    text-align: center;
+    padding: 10px;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    background-color: #fff;
+    -webkit-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+    z-index: 10;
+}
+
+.text-warning, 
+.text-warning:hover, 
+a.text-warning, 
+a.text-warning:focus, 
+a.text-warning:hover {
+    color: #e67e22;
+}
+
+.store-item-image {
+    overflow: hidden;
+}
+
+.store-item-image img {
+    -webkit-transition: transform .2s ease-out;
+    transition: transform .2s ease-out;
+}
+
+.store-item-info {
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.themed-color-dark {
+    color: #394263;
+}
+
+.store-item-price {
+    font-weight: 700;
+    font-size: 28px;
+}
+
+.text-primary, .text-primary:hover, a, a:focus, a:hover {
+    color: #1bbae1;
+    text-decoration:none;
+}
+
+.store-menu {
+  margin-top: 30px;
+}
+
+.store-menu ul li {
+  border-bottom: 1px solid #f0f4f7;
+}
+
+.store-menu ul li:last-child {
+  border-bottom: none;
+}
+
+.store-menu ul li a {
+  color: #93a3b5;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.store-menu ul li a i {
+  margin-right: 8px;
+  font-size: 14px;
+}
+
+.store-menu ul li a:hover {
+  background-color: #fafcfd;
+  color: #5b9bd1;
+}
+
+.store-menu ul li.active {
+  border-bottom: none;
+}
+
+.store-menu ul li.active a {
+  color: #5b9bd1;
+  background-color: #f6f9fb;
+  border-left: 2px solid #5b9bd1;
+  margin-left: -2px;
+}
+
+</style>
+
+
+
+
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container">
+    <div class="row">
+<% @products.each do |product| %>
+        <div class="col-md-12">
+            <div class="col-md-4 col-sm-4">
+                <div class="store-item">
+                    <div class="store-item-rating text-warning">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half-o"></i>
+                    </div>
+                    <div class="store-item-image">
+                        <a href="#">
+                            <%= link_to image_tag(product.avatar.url(:medium)), @product, :remote => true,  :rel => "tooltip", :title => "Mostrar", :class => 'btn btn-link img-responsive' %>
+                        </a>
+                    </div>
+                    <div class="store-item-info clearfix">
+                        <span class="store-item-price themed-color-dark pull-right">$ 109</span>
+                        <a href="#"><strong>Product one</strong></a><br>
+                        <small><i class="fa fa-shopping-cart text-muted"></i>
+                        <a href="#" class="text-muted">Add to cart</a></small>
                     </div>
                 </div>
-            </div>
-        </div>                           
-
-        <!-- The JavaScript -->
-        <script type="text/javascript" src="jquery-1.3.2.js"></script>
-        <script type="text/javascript">
-            $(function() {
-                $('#activator').click(function(){
-                    $('#overlay').fadeIn('fast',function(){
-                        $('#box').animate({'top':'160px'},500);
-                    });
-                });
-                $('#boxclose').click(function(){
-                    $('#box').animate({'top':'-200px'},500,function(){
-                        $('#overlay').fadeOut('fast');
-                    });
-                });
-                $('#activator2').click(function(){
-                    $('#overlay2').fadeIn('fast',function(){
-                        $('#box2').animate({'top':'160px'},500);
-                    });
-                });
-                $('#boxclose2').click(function(){
-                    $('#box2').animate({'top':'-200px'},500,function(){
-                        $('#overlay2').fadeOut('fast');
-                    });
-                });
-            });
-        </script>
-    </body>
-</html>
+            </div> 
+                 
+        </div>
+<% end %>
+    </div>
+</div>
 
 
-</script>
 
 
 
@@ -516,15 +876,10 @@ background-color: #1ABC9C;
         <div class="row">
             <div class="col-md-9">
                 <h1>
-                    Conozca Nuestros Productos</h1>
+                    Ultimos Productos Ofertados</h1>
             </div>
         </div>
-        <%= form_tag request.path, :method => 'get' do %>
-        <%= content_tag :label do %>
-        <%= text_field_tag :search, params[:search], :placeholder => "Encuentre su Producto" %>
-        <%= submit_tag "Consultar", :name => nil %>
-        <% end %>
-        <% end %>
+
         <br />
         <div class="panel-body">
         </div>
@@ -1136,7 +1491,7 @@ background-color: #1ABC9C;
                         <div class="footer-menu">
                             <h2 class="footer-wid-title">Nuestros Servicios</h2>
                             <ul>
-                                <li><%= link_to 'Ingeniería Mecánica', signup_path, :class => "links_footer" %></li>
+                                <li><%= link_to 'Ingeniería Mecánica', login_path, :class => "links_footer" %></li>
                             </ul>
                         </div>
                     </div>
@@ -1144,7 +1499,7 @@ background-color: #1ABC9C;
                         <div class="footer-menu">
                             <h2 class="footer-wid-title">Registrarte </h2>
                             <ul>
-                                <li><%= link_to 'Registra tus Datos', signup_path, :class => "links_footer" %></li>
+                                <li><%= link_to 'Registra tus Datos', login_path, :class => "links_footer" %></li>
                             </ul>
                         </div>
                     </div>

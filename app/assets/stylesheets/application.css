@@ -163,7 +163,11 @@
 
 
 
-
+.modal-title{
+  color: #FFFFFF !important;
+  font-weight: bold;
+  font-size: 25px;
+}
 
 
 
@@ -267,9 +271,6 @@ a.socialIcon:hover, .socialHoverClass {
     margin-bottom: 30px;
   }
 }
-
-
-
 
 
 
@@ -1169,7 +1170,7 @@ input[type="submit"], button[type=submit] {
     border: medium none;
     color: #fff;
     padding: 11px 20px;
-    text-transform: uppercase;
+    text-transform: capitalize;
 }
 input[type="submit"]:hover, button[type=submit]:hover {background-color: #222}
 .single-sidebar input[type="text"] {
@@ -1766,6 +1767,11 @@ html,body
 .list-group-item{
   height: 98px !important;
   width: 100px;
+  margin-left: -2530%;
+}
+
+.list-group{
+  width: 30px;
 }
 
 

@@ -7,6 +7,55 @@ $(document).ready(function () {
     });
 });
 </script>
+
+
+<script type="text/javascript">
+     function validate(field) {
+    // Get the  value of the input field being submitted
+    value = document.getElementById(field).value;
+
+    // Set the error field tag in the html
+    errorField = field + 'Error';
+
+    // Set the success field
+    successField = field + 'Success';
+
+    if (value != '') {
+        document.getElementById(successField).style.display = 'block';
+        document.getElementById(errorField).style.display = 'none';
+        return true;
+    } else {
+        document.getElementById(successField).style.display = 'none';
+        document.getElementById(errorField).style.display = 'block';
+        return false;
+    }
+}
+
+function SimulateSubmit() {
+    // Query your elements some how
+    var inputs = document.getElementsByTagName('input');
+
+    // Loop your elements
+    for (i = 0, len = inputs.length; i < len; i++) {
+        if( validate(inputs[i].id) === false) {
+        }
+    }
+}
+</script>
+
+<style type="text/css">
+    .err, .suc {
+    display: none;
+}
+.err { color: red;}
+.suc { color: green;}
+</style>
+
+
+
+
+
+
 <div class="container">
         <div class="row centered-form ">
         <div class="col-xs-12 col-sm-8 col-md-12 ">
@@ -20,16 +69,20 @@ $(document).ready(function () {
                                     <div class="input-container">
                                         <div class="input-group">
                                             <span class="input-group-addon">Nombre:</span>
-                                            <%= f.text_field :name, class: "form-control valid" %>
+                                            <%= f.text_field :name, class: "form-control valid", id: 'Nombre', onblur: "validate('Nombre')" %>
                                         </div>
+                                        <span id="NombreError" class="err">Por Favor ingresa un Nombre</span>
+                                        <span id="NombreSuccess" class="suc">Dato ingresado correctamente</span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input-container">
                                         <div class="input-group">
                                             <span class="input-group-addon">Stock:</span>
-                                            <%= f.number_field :stock, class: "form-control valid" %>
+                                            <%= f.number_field :stock, class: "form-control valid", id: 'Stock', onblur: "validate('Stock')" %>
                                         </div>
+                                        <span id="StockError" class="err">Por Favor ingresa un Stock</span>
+                                        <span id="StockSuccess" class="suc">Dato ingresado correctamente</span>
                                     </div>
                                 </div>
                             </div>
@@ -39,16 +92,20 @@ $(document).ready(function () {
                                     <div class="input-container">
                                         <div class="input-group">
                                             <span class="input-group-addon">Cantidad:</span>
-                                            <%= f.number_field :quantity, class: "form-control valid", id: 'txt1' %>
+                                            <%= f.number_field :quantity, class: "form-control valid", id: 'Cantidad', onblur: "validate('Cantidad')" %>
                                         </div>
+                                        <span id="CantidadError" class="err">Por Favor ingresa una Cantidad</span>
+                                        <span id="CantidadSuccess" class="suc">Dato ingresado correctamente</span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input-container">
                                         <div class="input-group">
                                             <span class="input-group-addon">Referencia:</span>
-                                            <%= f.text_field :reference, class: "form-control valid" %>
+                                            <%= f.text_field :reference, class: "form-control valid", id: 'Referencia', onblur: "validate('Referencia')" %>
                                         </div>
+                                        <span id="ReferenciaError" class="err">Por Favor ingresa una Referencia</span>
+                                        <span id="ReferenciaSuccess" class="suc">Dato ingresado correctamente</span>
                                     </div>
                                 </div>
                             </div>
@@ -62,8 +119,10 @@ $(document).ready(function () {
                                                   prompt:       '-- Seleccionar --',
                                                   collection: @product.select_new_used.sort,
                                                   error: false, label: false,
-                                                  input_html:   {class: 'form-control'} %>
-                                        <div>
+                                                  input_html:   {class: 'form-control'}, id: 'NuevoUsado', onblur: "validate('NuevoUsado')" %>
+                                        </div>
+                                        <span id="NuevoUsadoError" class="err">Por Favor Selecciona si es nuevo o usado</span>
+                                        <span id="NuevoUsadoSuccess" class="suc">Dato ingresado correctamente</span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -72,8 +131,10 @@ $(document).ready(function () {
                                             <span class="input-group-addon">Tipo Producto:</span>
                                             <%= f.collection_select :type_product_id,
                                             TypeProduct.all, :id, :name, { prompt: "Por favor
-                                                selecciona uno", :selected => params[:search], hide_label: :true }, class: "input-sm" %>
-                                        <div>
+                                                selecciona uno", :selected => params[:search], hide_label: :true }, class: "input-sm", id: 'TipoProducto', onblur: "validate('TipoProducto')" %>
+                                        </div>
+                                        <span id="TipoProductoError" class="err">Por Favor Selecciona un tipo de producto</span>
+                                        <span id="TipoProductoSuccess" class="suc">Dato ingresado correctamente</span>
                                     </div>
                                 </div>
                             </div>
@@ -83,17 +144,17 @@ $(document).ready(function () {
                                     <div class="input-container">
                                         <div class="input-group">
                                             <span class="input-group-addon">Precio Unitario:</span>
-                                            <%= f.number_field :unit_price, class: "form-control valid", id: 'txt2' %>
+                                            <%= f.number_field :unit_price, class: "form-control valid", id: 'PrecioUnitario', onblur: "validate('PrecioUnitario')" %>
                                         </div>
+                                        <span id="PrecioUnitarioError" class="err">Por Favor ingresa un Precio</span>
+                                        <span id="PrecioUnitarioSuccess" class="suc">Dato ingresado correctamente</span>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="input-container">
                                         <div class="input-group">
                                             <span class="input-group-addon">Total:</span>
-                                            <%= f.number_field :total, class: "form-control valid", id: 'Total' %>
+                                            <%= f.number_field :total, class: "form-control valid" %>
                                         </div>
                                     </div>
                                 </div>
@@ -104,8 +165,10 @@ $(document).ready(function () {
                                     <div class="input-container">
                                         <div class="input-group">
                                             <span class="input-group-addon">Descripción:</span>
-                                            <%= f.text_area :description, class: "form-control valid" %>
+                                            <%= f.text_area :description, class: "form-control valid", id: 'Descripcion', onblur: "validate('Descripcion')" %>
                                         </div>
+                                        <span id="DescripcionError" class="err">Por Favor ingresa una Descripcion</span>
+                                        <span id="DescripcionSuccess" class="suc">Dato ingresado correctamente</span>
                                     </div>
                                 </div>
                             </div>
