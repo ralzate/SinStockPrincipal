@@ -2,11 +2,14 @@
 <script type="text/javascript">
   // Multiplicar Cantidad por Precio Modelo de Productos
 $(document).ready(function () {
-    $("#txt1, #txt2").change(function() {
-        $("#txt3").val($("#txt1").val() * $("#txt2").val());
+    $(".txt1, .txt2").change(function() {
+        $(".txt3").val($(".txt1").val() * $(".txt2").val());
     });
 });
 </script>
+
+
+
 
 
 <script type="text/javascript">
@@ -54,7 +57,7 @@ function SimulateSubmit() {
 
 
 
-
+    <%= f.error_notification %>
 
 <div class="container">
         <div class="row centered-form ">
@@ -92,7 +95,7 @@ function SimulateSubmit() {
                                     <div class="input-container">
                                         <div class="input-group">
                                             <span class="input-group-addon">Cantidad:</span>
-                                            <%= f.number_field :quantity, class: "form-control valid", id: 'Cantidad', onblur: "validate('Cantidad')" %>
+                                            <%= f.number_field :quantity, class: "form-control valid txt1", id: 'Cantidad', onblur: "validate('Cantidad')" %>
                                         </div>
                                         <span id="CantidadError" class="err">Por Favor ingresa una Cantidad</span>
                                         <span id="CantidadSuccess" class="suc">Dato ingresado correctamente</span>
@@ -144,7 +147,7 @@ function SimulateSubmit() {
                                     <div class="input-container">
                                         <div class="input-group">
                                             <span class="input-group-addon">Precio Unitario:</span>
-                                            <%= f.number_field :unit_price, class: "form-control valid", id: 'PrecioUnitario', onblur: "validate('PrecioUnitario')" %>
+                                            <%= f.number_field :unit_price, class: "form-control valid txt2", id: 'PrecioUnitario', onblur: "validate('PrecioUnitario')" %>
                                         </div>
                                         <span id="PrecioUnitarioError" class="err">Por Favor ingresa un Precio</span>
                                         <span id="PrecioUnitarioSuccess" class="suc">Dato ingresado correctamente</span>
@@ -154,7 +157,7 @@ function SimulateSubmit() {
                                     <div class="input-container">
                                         <div class="input-group">
                                             <span class="input-group-addon">Total:</span>
-                                            <%= f.number_field :total, class: "form-control valid" %>
+                                            <%= f.number_field :total, class: "form-control valid txt3", :readonly => true %>
                                         </div>
                                     </div>
                                 </div>

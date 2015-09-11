@@ -7,9 +7,9 @@ class CreateProducts < ActiveRecord::Migration
       t.string :reference
       t.references :type_product, index: true, foreign_key: true
       t.references :user, index: true, foreign_key: true
-      t.integer :quantity
-      t.decimal :unit_price
-      t.decimal :total
+      t.decimal  :quantity
+      t.decimal  :unit_price
+      t.decimal  :total
       t.integer :new_used
 
       t.timestamps null: false

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150908154633) do
+ActiveRecord::Schema.define(version: 20150911162629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,7 +103,7 @@ ActiveRecord::Schema.define(version: 20150908154633) do
     t.string   "reference"
     t.integer  "type_product_id"
     t.integer  "user_id"
-    t.integer  "quantity"
+    t.decimal  "quantity"
     t.decimal  "unit_price"
     t.decimal  "total"
     t.integer  "new_used"
@@ -192,6 +192,7 @@ ActiveRecord::Schema.define(version: 20150908154633) do
     t.string   "activation_token"
     t.datetime "activation_token_expires_at"
     t.string   "picture"
+    t.string   "logo"
     t.boolean  "admin",                            default: false
     t.integer  "failed_logins_count",              default: 0
     t.datetime "lock_expires_at"
@@ -202,6 +203,10 @@ ActiveRecord::Schema.define(version: 20150908154633) do
     t.string   "last_login_from_ip_address"
     t.string   "type_user"
     t.integer  "rol_id"
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
   end
 
   add_index "users", ["activation_token"], name: "index_users_on_activation_token", using: :btree
